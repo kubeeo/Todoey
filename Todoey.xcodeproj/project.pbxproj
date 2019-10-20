@@ -12,6 +12,7 @@
 		EB3784CC230DB421004CBA74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB3784CA230DB421004CBA74 /* Main.storyboard */; };
 		EB3784CE230DB424004CBA74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB3784CD230DB424004CBA74 /* Assets.xcassets */; };
 		EB3784D1230DB424004CBA74 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB3784CF230DB424004CBA74 /* LaunchScreen.storyboard */; };
+		EB94C7B72354EE0C00CBB0C0 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB94C7B62354EE0C00CBB0C0 /* CategoryTableViewController.swift */; };
 		EB967A052350F496004B2468 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EB967A032350F496004B2468 /* DataModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +24,7 @@
 		EB3784CD230DB424004CBA74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB3784D0230DB424004CBA74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EB3784D2230DB424004CBA74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EB94C7B62354EE0C00CBB0C0 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
 		EB967A042350F496004B2468 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -85,6 +87,7 @@
 		EB9679FF234FB2AC004B2468 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				EB94C7B62354EE0C00CBB0C0 /* CategoryTableViewController.swift */,
 				EB3784C8230DB421004CBA74 /* TodoListViewController.swift */,
 			);
 			path = Controllers;
@@ -173,6 +176,7 @@
 				EB3784C9230DB421004CBA74 /* TodoListViewController.swift in Sources */,
 				EB967A052350F496004B2468 /* DataModel.xcdatamodeld in Sources */,
 				EB3784C7230DB421004CBA74 /* AppDelegate.swift in Sources */,
+				EB94C7B72354EE0C00CBB0C0 /* CategoryTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,6 +325,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FKAAXLMQL7;
 				INFOPLIST_FILE = Todoey/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -339,6 +344,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FKAAXLMQL7;
 				INFOPLIST_FILE = Todoey/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

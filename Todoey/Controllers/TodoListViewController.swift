@@ -13,6 +13,12 @@ class TodoListViewController: UITableViewController{
 
     var itemArray = [Item]()
     
+    var selectedCategory : Category? {
+        didSet{
+            loadItems()
+        }
+    }
+    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
@@ -20,8 +26,7 @@ class TodoListViewController: UITableViewController{
         
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         
-        
-        loadItems()
+
         
 //        if let items = UserDefaults.standard.array(forKey: "ToDoListArray") as? [Item] {
 //            itemArray = items
@@ -30,7 +35,7 @@ class TodoListViewController: UITableViewController{
     }
 
 
-    //MARK - Tableview Datasource Methods
+    //MARK: - Tableview Datasource Methods
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itemArray.count
@@ -50,7 +55,7 @@ class TodoListViewController: UITableViewController{
         return cell
     }
     
-    //Mark - TableView Delegate Methods
+    //Mark: - TableView Delegate Methods
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -64,7 +69,7 @@ class TodoListViewController: UITableViewController{
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    //MARK - Add New Items
+    //MARK: - Add New Items
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         
@@ -80,7 +85,7 @@ class TodoListViewController: UITableViewController{
             
             newItem.title = textField.text!
             newItem.done = false
-            
+            newItem.parentCategory = self.selectedCategory
             self.itemArray.append(newItem)
             
             
@@ -98,7 +103,7 @@ class TodoListViewController: UITableViewController{
         
     }
     
-    //MARK - Model Manupulation Methods
+    //MARK: - Model Manupulation Methods
     func saveItems() {
         
         do {
@@ -111,7 +116,16 @@ class TodoListViewController: UITableViewController{
         self.tableView.reloadData()
     }
     
-    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
+    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest(), predicate: NSPredicate? = nil) {
+        
+        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
+        
+        if let additionalPredicate = predicate {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, additionalPredicate])
+        } else {
+            request.predicate = categoryPredicate
+        }
+
         
         do {
            itemArray = try context.fetch(request)
@@ -128,21 +142,17 @@ class TodoListViewController: UITableViewController{
 
 // MARK: - Search bar methods
 
-
-
 extension TodoListViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         let request : NSFetchRequest<Item> = Item.fetchRequest()
         
-        print(searchBar.text!)
-        
-        request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
+        let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
         
         request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
         
-        loadItems(with: request)
+        loadItems(with: request, predicate: predicate)
         
     }
     
